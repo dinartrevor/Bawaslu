@@ -8,7 +8,7 @@
 </head>
 
 <body>
-  <h5>Bawaslu Export</h5>
+  <h5>Bawaslu Export PDF</h5>
   <p>Mulai dari {{$letters->start_date}}</p>
   <p>Sampai dengan {{$letters->end_date}}</p>
   <p>Surat {{$letters->category}}</p>
