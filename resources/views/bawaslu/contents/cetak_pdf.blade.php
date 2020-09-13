@@ -8,8 +8,8 @@
 </head>
 
 <body>
-  <p>{{$letters->start_date}}</p>
-  <p>{{$letters->end_date}}</p>
+  <p>mulai dari {{$letters->start_date}}</p>
+  <p>sampai dengan {{$letters->end_date}}</p>
   <p>{{$letters->category}}</p>
   <p>{{$letters->employee_name}}</p>
   <p>{{$letters->employee_position}}</p>
