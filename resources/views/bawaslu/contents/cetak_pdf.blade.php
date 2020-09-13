@@ -25,8 +25,8 @@
   <strong>Keterangan Poin B</strong>
   <p>{{$letters->information_b}}</p>
   @endif
-  <p>{{$letters->month}} Bulan</p>
-  <p>{{$letters->year}} Tahun</p>
+  <p>Bulan {{$letters->month}} </p>
+  <p>Tahun {{$letters->year}} </p>
 
 </body>
 
