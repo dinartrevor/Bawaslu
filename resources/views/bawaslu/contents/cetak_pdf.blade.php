@@ -8,11 +8,11 @@
 </head>
 
 <body>
-  <p>mulai dari {{$letters->start_date}}</p>
-  <p>sampai dengan {{$letters->end_date}}</p>
-  <p>{{$letters->category}}</p>
-  <p>{{$letters->employee_name}}</p>
-  <p>{{$letters->employee_position}}</p>
+  <p>Mulai dari {{$letters->start_date}}</p>
+  <p>Sampai dengan {{$letters->end_date}}</p>
+  <p>Surat {{$letters->category}}</p>
+  <p>Nama {{$letters->employee_name}}</p>
+  <p>Jabatan {{$letters->employee_position}}</p>
   @if($letters->category === 'Coklit')
   <strong>Keterangan Poin B</strong>
   <p>{{$letters->information_b}}</p>
