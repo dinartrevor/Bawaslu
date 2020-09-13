@@ -21,7 +21,7 @@
           <div class="media">
             <div class="media-body">
               <h3 class="dropdown-item-title">
-                Brad Diesel
+                {{Auth::user() ? Auth::user()->name : ""}}
                 <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
               </h3>
             </div>
@@ -39,7 +39,7 @@
         </a>
       </div>
     </li>
-  
+
   </ul>
 </nav>
 <!-- /.navbar -->

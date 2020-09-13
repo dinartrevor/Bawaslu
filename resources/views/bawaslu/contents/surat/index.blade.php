@@ -41,42 +41,85 @@ Surat
             <thead>
               <tr>
                 <th>No</th>
-                <th>Nama</th>
-                <th>Jabatan</th>
-                <th>Tempat Tugas</th>
-                <th>Kategori</th>
                 <th>Mulai Dari</th>
                 <th>Sampai Dengan</th>
+                <th>Tempat Tugas</th>
+                <th>Kategori</th>
+                <th>Nama</th>
+                <th>Jabatan</th>
+
                 <th>Aksi</th>
               </tr>
             </thead>
             <tbody>
-           
+              @foreach ($letters as $data)
               <tr>
-                <td>1</td>
-                <td>Nama</td>
-                <td>Jabatan</td>
-                <td>Tempat Tugas</td>
-                <td>Kategori</td>
-                <td>Mulai Dari</td>
-                <td>Sampai Dengan</td>
-                <td>Aksi</td>
-                {{-- <td>{{$course->title}}</td>
-                <td>{{$course->category->name}}</td>
-                <td>{{$course->price}}</td>
-                <td>{{auth()->user()->name}}</td>
-                <td><img src="{{ asset('images/course/' .  $course->image )}}" width="50px" height="50px" alt=""></td>
+                <td>{{$loop->iteration}}</td>
+                <td>{{date('d-m-Y', strtotime($data->start_date))}}</td>
+                <td>{{date('d-m-Y', strtotime($data->end_date))}}</td>
+                <td>{{ $data->place_duty }}</td>
+                <td><a href="#" data-toggle="modal" data-target="#keterangan_{{$data->id}}">{{ $data->category }}</a>
+                </td>
                 <td>
-                  <a href="{{ route('pegawai.edit', $course->id)}}" class="btn btn-success"><i
-                      class="fas fa-pen"></i></a>
-                  <a href=" {{route('show_courses', $course->slug)}}" class="btn btn-info"><i
-                      class="fas fa-eye"></i></a>
-                  <a href="{{route('pegawai.destroy', $course->id)}}" class="btn btn-danger"
-                    onclick="return confirm('apa anda yakin ingin menghapus ?' )"><i class="fas fa-trash"></i></a>
-
-                </td> --}}
-              </tr>
-             
+                  <ul>
+                    @foreach($data->employee as $h)
+                    <li> {{ $h->name }} </li>
+                    @endforeach
+                  </ul>
+                </td>
+                <td>
+                  <ul>
+                    @foreach($data->employee as $h)
+                    <li> {{ $h->position }} </li>
+                    @endforeach
+                  </ul>
+                </td>
+                <td>
+                  <div class="btn-group btn-group-sm">
+                    <a href="{{ route('surat.edit', $data->id)}}" class="btn btn-success"><i class="fas fa-pen"></i></a>
+                    <a href="{{ route('cetak_surat', $data->id)}}" class="btn btn-primary"><i
+                        class="fas fa-upload"></i></a>
+                    <form action="{{ route('surat.destroy' , $data->id)}}" method="POST">
+                      <input name="_method" type="hidden" value="DELETE">
+                      @csrf
+                      @method('delete')
+                      <button type="submit" class="btn btn-danger"
+                        onclick="return confirm('Apakah Anda yakin untuk menghapus')"><i
+                          class="fas fa-trash"></i></button>
+                    </form>
+                  </div>
+                </td>
+                @endforeach
+                <div class="modal fade" id="keterangan_{{$data->id}}" tabindex="-1" role="dialog"
+                  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Keterangan Surat {{$data->category}}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        @if($data->category === 'Coklit')
+                        <strong>Keterangan Poin B</strong>
+                        <p>{{$data->information_b}}</p>
+                        @elseif($data->category === 'Faktual')
+                        <strong>Keterangan Poin B</strong>
+                        <p>{{$data->information_b}}</p>
+                        @else
+                        <strong>Keterangan Poin A</strong>
+                        <p>{{$data->information_a}}</p>
+                        <strong>Keterangan Poin B</strong>
+                        <p>{{$data->information_b}}</p>
+                        @endif
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
             </tbody>
           </table>
         </div>

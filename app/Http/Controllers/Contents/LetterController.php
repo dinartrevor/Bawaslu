@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Letter; 
 use App\Models\Employee;
+use App\Models\EmployeeLetter;
+use DB;
+use PDF;
 class LetterController extends Controller
 {
     /**
@@ -15,7 +18,9 @@ class LetterController extends Controller
      */
     public function index()
     {
-        return view('bawaslu.contents.surat.index');
+        $letters = Letter::with('employee')->get();
+        
+        return view('bawaslu.contents.surat.index', compact('letters'));
     }
 
     /**
@@ -24,8 +29,9 @@ class LetterController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
+    {   
+        $employees = Employee::all();
+        return view('bawaslu.contents.surat.tambah', compact('employees'));
     }
 
     /**
@@ -36,7 +42,25 @@ class LetterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        DB::beginTransaction();
+        try {
+             $insert = Letter::create($data);
+            if(isset($insert['id'])) {
+
+                if(isset($request->employee_id) && $request->employee_id){
+                    foreach ($data['employee_id'] as $key => $value) {
+                        EmployeeLetter::create(array('letter_id' => $insert['id'],
+                        'employee_id' => $value));
+                    }
+                }
+                 DB::commit();
+                 return redirect()->route('surat.index')->with('sukses','Data Berhasil Di simpan');
+            }
+         } catch (\Exception $ex) {
+             DB::rollback();
+             throw $ex;
+         }
     }
 
     /**
@@ -81,6 +105,36 @@ class LetterController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $isi = Letter::where('id',$id)->first();
+        $letter = DB::delete('DELETE letters,employee_letters FROM letters LEFT JOIN employee_letters ON employee_letters.letter_id = letters.id  WHERE letters.id = ?', [$isi->id]);
+        if($letter){
+            return redirect()->route('surat.index')->with('sukses','Data Berhasil Di hapus');
+        }else{
+            return redirect()->route('surat.index')->with('sukses','Data gagal Di hapus');
+        }
+    }
+    public function cetak_surat($id){
+        $letters = Letter::find($id);
+        if ($letters) {
+            $letters->employee_name = "-";
+            $letters->employee_position = "-";
+            if (!empty($letters->employee)) {
+                $arrEmployee= [];
+                $arrEmployeePosition= [];
+                foreach($letters->employee as $key => $employee) {
+                    array_push($arrEmployee, $employee->name);
+                    array_push($arrEmployeePosition, $employee->position);
+                    
+                }
+                $letters->employee_name = implode(", ", $arrEmployee);
+                $letters->employee_position = implode(", ", $arrEmployeePosition);
+            }
+            
+        } else {
+            $letters = [];
+        }
+        $pdf = PDF::loadview('bawaslu.contents.cetak_pdf', compact('letters'));
+        return $pdf->stream();
+        
     }
 }

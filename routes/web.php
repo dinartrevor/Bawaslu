@@ -26,5 +26,6 @@ Route::group([
     function () {
         Route::resource('/pegawai','EmployeeController');
         Route::resource('/surat','LetterController');
+        Route::get('/cetak_surat/{id}', 'LetterController@cetak_surat')->name('cetak_surat');
     }
 );

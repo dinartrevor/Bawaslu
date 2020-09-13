@@ -120,6 +120,28 @@
       // });
     });
     $(".select2").select2({"allowClear": true, "placeholder": {"id": "", "text": "Courses"}});
+    $(function () {
+      $('#keterangan_a').hide();
+      $('#keterangan_b').hide();
+
+      $('#category').change(function () {
+        if ($('#category').val() == 'Coklit') {
+          $('#keterangan_b').show();
+        }
+        if($('#category').val() == 'Faktual'){
+          $('#keterangan_b').show();
+        }
+        if($('#category').val() == 'Biasa'){
+          $('#keterangan_a').show();
+          $('#keterangan_b').show();
+        } 
+        if ($('#category').val() == '') {
+          $('#keterangan_a').hide();
+          $('#keterangan_b').hide();
+        }
+      });
+
+    });
   </script>
   <script>
     $('.datepicker').datepicker({

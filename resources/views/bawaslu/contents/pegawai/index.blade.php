@@ -37,36 +37,39 @@ Pegawai
             <strong>{{ $message }}</strong>
           </div>
           @endif
-          <table id="example1" class="table table-bordered table-striped">
+          <table id="example1" class="table table-bordered table-hover text-center">
             <thead>
               <tr>
                 <th>No</th>
                 <th>Nama</th>
                 <th>Jabatan</th>
+                <th>Aksi</th>
               </tr>
             </thead>
             <tbody>
-           
+              @foreach ($employees as $data)
               <tr>
-                <td>1</td>
-                <td>Nama</td>
-                <td>Jabatan</td>
-                {{-- <td>{{$course->title}}</td>
-                <td>{{$course->category->name}}</td>
-                <td>{{$course->price}}</td>
-                <td>{{auth()->user()->name}}</td>
-                <td><img src="{{ asset('images/course/' .  $course->image )}}" width="50px" height="50px" alt=""></td>
+                <td>{{$loop->iteration}}</td>
+                <td>{{$data->name}}</td>
+                <td>{{$data->position}}</td>
                 <td>
-                  <a href="{{ route('pegawai.edit', $course->id)}}" class="btn btn-success"><i
-                      class="fas fa-pen"></i></a>
-                  <a href=" {{route('show_courses', $course->slug)}}" class="btn btn-info"><i
-                      class="fas fa-eye"></i></a>
-                  <a href="{{route('pegawai.destroy', $course->id)}}" class="btn btn-danger"
-                    onclick="return confirm('apa anda yakin ingin menghapus ?' )"><i class="fas fa-trash"></i></a>
-
-                </td> --}}
+                  <div class="btn-group btn-group-sm">
+                    <a href="{{ route('pegawai.edit', $data->id)}}" class="btn btn-success"><i
+                        class="fas fa-pen"></i></a>
+                    <form action="{{ route('pegawai.destroy' , $data->id)}}" method="POST">
+                      <input name="_method" type="hidden" value="DELETE">
+                      @csrf
+                      @method('delete')
+                      <button type="submit" class="btn btn-danger"
+                        onclick="return confirm('Apakah Anda yakin untuk menghapus')"><i
+                          class="fas fa-trash"></i></button>
+                    </form>
+                  </div>
+                </td>
               </tr>
-             
+              @endforeach
+
+
             </tbody>
           </table>
         </div>

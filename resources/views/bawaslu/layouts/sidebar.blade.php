@@ -8,10 +8,11 @@
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <div class="image">
-        <img src="/clever/img/lokerprogrammer.png" class="img-circle elevation-2" alt="User Image">
+        <img src="{{asset('images/bawaslu.jpeg')}}" alt="Bawaslu" class="elevation-2"
+          style="width: 100% !important; height: 100% !important;">
       </div>
       <div class="info">
-        <a href="#" class="d-block">{{Auth::user() ? Auth::user()->name : ""}}</a>
+        <a href="#" class="d-block"></a>
       </div>
     </div>
 
@@ -30,7 +31,7 @@
           </a>
         </li>
         <li class="nav-item has-treeview ">
-        <a href="{{route('surat.index')}}" class="nav-link  {{ Request::is('contents/surat') ? 'active' : '' }}">
+          <a href="{{route('surat.index')}}" class="nav-link  {{ Request::is('contents/surat') ? 'active' : '' }}">
             <i class="nav-icon fas fa-copy"></i>
             <p>
               Surat

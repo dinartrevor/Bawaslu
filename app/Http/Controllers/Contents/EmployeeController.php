@@ -14,8 +14,8 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        
-        return view('bawaslu.contents.pegawai.index');
+        $employees = Employee::orderBy('created_at', 'DESC')->get();
+        return view('bawaslu.contents.pegawai.index', compact('employees'));
     }
 
     /**
@@ -36,7 +36,19 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $request->validate([
+
+
+            'name'   => 'required',
+            'position'    => 'required',
+        ]);
+    
+        $insert = Employee::create($data);
+        if(isset($insert['id'])){
+            return redirect()->route('pegawai.index')->with('sukses', 'Data Berhasil disimpan');
+        }
+        return redirect()->back();
     }
 
     /**
@@ -58,7 +70,8 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $employee = Employee::find($id);
+        return view('bawaslu.contents.pegawai.edit', compact('employee'));
     }
 
     /**
@@ -70,7 +83,14 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $request->validate([
+            'name'   => 'required',
+            'position'    => 'required',
+        ]);
+        $isi = Employee::where('id',$id)->first();
+        $isi->update($data);
+        return redirect()->route('pegawai.index')->with('sukses', 'Data Berhasil diupdate');
     }
 
     /**
@@ -81,6 +101,8 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $employees = Employee::find($id);
+        $employees->delete();
+        return redirect()->route('pegawai.index')->with('sukses', 'Data Berhasil dihapus');
     }
 }

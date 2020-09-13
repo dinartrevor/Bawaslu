@@ -41,19 +41,19 @@ Admin|Pegawai|Tambah
                   <strong>{{ $message }}</strong>
                 </span>
                 @enderror
-                
+
               </div>
               <div class="form-group">
                 <label for="name" class="col-form-label">Jabatan:</label>
-                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="position"
-                  value="{{ old('name') }}"  autofocus>
+                <input id="name" type="text" class="form-control @error('position') is-invalid @enderror"
+                  name="position" value="{{ old('position') }}" autofocus>
 
-                @error('name')
+                @error('position')
                 <span class="invalid-feedback" role="alert">
                   <strong>{{ $message }}</strong>
                 </span>
                 @enderror
-                
+
               </div>
               <div class="card-footer">
                 <a href="{{route('pegawai.index')}}" class="btn btn-secondary">Kembali</a>

@@ -22,7 +22,8 @@ class CreateLettersTable extends Migration
             $table->integer('year');
             $table->text('information_a')->nullable();
             $table->text('information_b')->nullable();
-            $table->enum('categories', ['Coklit', 'Biasa', 'Faktual']);
+            $table->string('category');
+            
             $table->timestamps();
         });
     }

@@ -1,7 +1,7 @@
 @extends('bawaslu.layouts.master')
 
 @section('title')
-Admin|Pegawai|Tambah
+Admin|Pegawai|Edit
 @endsection
 
 @section('content')
@@ -9,7 +9,7 @@ Admin|Pegawai|Tambah
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Tambah Pegawai</h1>
+        <h1>Update Pegawai</h1>
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
@@ -28,36 +28,38 @@ Admin|Pegawai|Tambah
           <div class="card-header">
             <h3 class="card-title">Pegawai</h3>
           </div>
-          <form method="POST" action="{{ route('pegawai.store') }}" enctype="multipart/form-data" autocomplete="off">
+          <form method="POST" action="{{ route('pegawai.update', $employee) }}" enctype="multipart/form-data"
+            autocomplete="off">
             @csrf
+            @method('put')
             <div class="card-body">
               <div class="form-group">
                 <label for="name" class="col-form-label">Name:</label>
                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name"
-                  value="{{ old('name') }}" autofocus>
+                  value="{{ $employee->name }}" autofocus>
 
                 @error('name')
                 <span class="invalid-feedback" role="alert">
                   <strong>{{ $message }}</strong>
                 </span>
                 @enderror
-                
+
               </div>
               <div class="form-group">
                 <label for="name" class="col-form-label">Jabatan:</label>
                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="position"
-                  value="{{ old('name') }}"  autofocus>
+                  value="{{$employee->position}}" autofocus>
 
                 @error('name')
                 <span class="invalid-feedback" role="alert">
                   <strong>{{ $message }}</strong>
                 </span>
                 @enderror
-                
+
               </div>
               <div class="card-footer">
                 <a href="{{route('pegawai.index')}}" class="btn btn-secondary">Kembali</a>
-                <button type="submit" class="btn btn-primary">Simpan</button>
+                <button type="submit" class="btn btn-primary">Update</button>
               </div>
             </div>
           </form>
