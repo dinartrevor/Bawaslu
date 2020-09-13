@@ -8,6 +8,7 @@
 </head>
 
 <body>
+  <h5>Bawaslu</h5>
   <p>Mulai dari {{$letters->start_date}}</p>
   <p>Sampai dengan {{$letters->end_date}}</p>
   <p>Surat {{$letters->category}}</p>
@@ -25,8 +26,8 @@
   <strong>Keterangan Poin B</strong>
   <p>{{$letters->information_b}}</p>
   @endif
-  <p>Bulan {{$letters->month}} </p>
-  <p>Tahun {{$letters->year}} </p>
+  <p>Bulan Ini {{$letters->month}} </p>
+  <p>Tahun Ini{{$letters->year}} </p>
 
 </body>
 
