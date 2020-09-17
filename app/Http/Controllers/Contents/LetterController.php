@@ -97,7 +97,24 @@ class LetterController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        DB::beginTransaction();
+        try {
+            $isi = Letter::where('id',$id)->first();
+            DB::delete('delete from employee_letters where letter_id = ?',[$isi->id]);
+            if(isset($request->employee_id) && $request->employee_id){
+                foreach ($data['employee_id'] as $key => $value) {
+                    EmployeeLetter::create(array('letter_id' => $id,
+                    'employee_id' => $value));
+                }
+            }
+            $isi->update($data);
+            DB::commit();
+            return redirect()->route('surat.index')->with('sukses','Data Berhasil Di update');
+        } catch (\Exception $ex) {
+            DB::rollback();
+            throw $ex;
+        }
     }
 
     /**

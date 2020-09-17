@@ -31,6 +31,7 @@ Admin|Surat|Tambah
           <form method="POST" action="{{ route('surat.update', $letters) }}" enctype="multipart/form-data"
             autocomplete="off">
             @csrf
+            @method('PUT')
             <div class="card-body">
               <div class="form-row">
                 <div class="form-group col-md-6">
