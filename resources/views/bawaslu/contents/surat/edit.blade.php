@@ -28,33 +28,34 @@ Admin|Surat|Tambah
           <div class="card-header">
             <h3 class="card-title">Surat</h3>
           </div>
-          <form method="POST" action="{{ route('surat.store') }}" enctype="multipart/form-data" autocomplete="off">
+          <form method="POST" action="{{ route('surat.update', $letters) }}" enctype="multipart/form-data"
+            autocomplete="off">
             @csrf
             <div class="card-body">
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="inputEmail4">Mulai Dari : </label>
-                  <input type="date" class="form-control" name="start_date">
+                  <input type="date" class="form-control" name="start_date" value="{{$letters->start_date}}">
                 </div>
                 <div class="form-group col-md-6">
                   <label for="inputPassword4">Sampai Dengan :</label>
-                  <input type="date" class="form-control" name="end_date">
+                  <input type="date" class="form-control" name="end_date" value="{{$letters->end_date}}">
                 </div>
               </div>
-              <div class="form-row">
+              <div class=" form-row">
                 <div class="form-group col-md-6">
                   <label for="inputEmail4">Bulan :</label>
-                  <input type="number" class="form-control" name="month" min="1" max="12">
+                  <input type="number" class="form-control" name="month" value="{{$letters->month}}" min="1" max="12">
                 </div>
                 <div class="form-group col-md-6">
                   <label for="inputPassword4">Tahun :</label>
-                  <input type="number" class="form-control" name="year">
+                  <input type="number" class="form-control" name="year" value="{{$letters->year}}">
                 </div>
               </div>
               <div class="form-group">
                 <label for="name" class="col-form-label">Tempat Tugas:</label>
                 <input id="name" type="text" class="form-control @error('place_duty') is-invalid @enderror"
-                  name="place_duty" value="{{ old('place_duty') }}" autofocus>
+                  name="place_duty" autofocus value="{{$letters->place_duty}}">
 
                 @error('place_duty')
                 <span class="invalid-feedback" role="alert">
@@ -67,9 +68,9 @@ Admin|Surat|Tambah
                 <label for="category" class="col-form-label">Pilih Surat:</label>
                 <select name="category" id="category" class="form-control">
                   <option value="">Surat</option>
-                  <option value="Coklit">Surat Coklit</option>
-                  <option value="Biasa">Surat Biasa</option>
-                  <option value="Faktual">Surat Faktual</option>
+                  <option value="Coklit" {{$letters->category == 'Coklit' ? 'selected' : ""}}>Surat Coklit</option>
+                  <option value="Biasa" {{$letters->category == 'Biasa' ? 'selected' : ""}}>Surat Biasa</option>
+                  <option value="Faktual" {{$letters->category == 'Faktual' ? 'selected' : ""}}>Surat Faktual</option>
                 </select>
 
                 @error('category')
@@ -79,14 +80,46 @@ Admin|Surat|Tambah
                 @enderror
 
               </div>
-              <div class="form-group" id="keterangan_a">
+              @if($letters->category == 'Coklit')
+              <div class="form-group">
                 <label for="comment">Ketarangan A :</label>
-                <textarea class="form-control" rows="5" id="information_a" name="information_a"></textarea>
+                <textarea class="form-control" rows="5" id="information_a" name="information_a">
+                {{$letters->information_a}}
+                  </textarea>
               </div>
-              <div class="form-group" id="keterangan_b">
+              <div class="form-group">
                 <label for="comment">Keterangan B :</label>
-                <textarea class="form-control" rows="5" id="information_b" name="information_b"></textarea>
+                <textarea class="form-control" rows="5" id="information_b" name="information_b">
+                  {{$letters->information_b}}
+                </textarea>
               </div>
+              @elseif($letters->category === 'Faktual')
+              <div class="form-group">
+                <label for="comment">Ketarangan A :</label>
+                <textarea class="form-control" rows="5" id="information_a" name="information_a">
+                  {{$letters->information_a}}
+                  </textarea>
+              </div>
+              <div class="form-group">
+                <label for="comment">Keterangan B :</label>
+                <textarea class="form-control" rows="5" id="information_b" name="information_b">
+                  {{$letters->information_b}}
+                </textarea>
+              </div>
+              @else
+              <div class="form-group">
+                <label for="comment">Ketarangan A :</label>
+                <textarea class="form-control" rows="5" id="information_a" name="information_a">
+                  {{$letters->information_a}}
+                  </textarea>
+              </div>
+              <div class="form-group">
+                <label for="comment">Keterangan B :</label>
+                <textarea class="form-control" rows="5" id="information_b" name="information_b">
+                  {{$letters->information_b}}
+                </textarea>
+              </div>
+              @endif
               <div class="card">
                 <div class="card-header">
                   <h3 class="card-title">DataTable Pegawai</h3>
@@ -102,14 +135,20 @@ Admin|Surat|Tambah
                       </tr>
                     </thead>
                     <tbody>
-                      @foreach ($employees as $data)
+                      @if($letters->id)
+                      @foreach ($employees as $employee)
                       <tr>
                         <td>{{$loop->iteration}}</td>
-                        <td>{{$data->name}}</td>
-                        <td>{{$data->position}}</td>
-                        <td><input type="checkbox" name="employee_id[]" value="{{$data->id}}"></td>
+                        <td>{{$employee->name}}</td>
+                        <td>{{$employee->position}}</td>
+                        <td><input type="checkbox" name="employee_id[]" @foreach($relations as $a=>$value)
+                          {{$employee->id==$value->employee_id ? 'checked':''}} @endforeach value="{{$employee->id}}">
+                        </td>
                       </tr>
                       @endforeach
+                      @else
+
+                      @endif
                     </tbody>
                   </table>
                 </div>

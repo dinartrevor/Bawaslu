@@ -82,7 +82,10 @@ class LetterController extends Controller
      */
     public function edit($id)
     {
-        //
+        $letters = Letter::where('id',$id)->first();
+        $employees = Employee::all();
+        $relations =EmployeeLetter::where('letter_id',$id)->select(['letter_id','employee_id'])->get();
+        return view('bawaslu.contents.surat.edit', compact('letters', 'employees', 'relations'));
     }
 
     /**
@@ -133,8 +136,28 @@ class LetterController extends Controller
         } else {
             $letters = [];
         }
-        $pdf = PDF::loadview('bawaslu.contents.cetak_pdf', compact('letters'));
-        return $pdf->stream();
-        
+        $phpWord = new \PhpOffice\PhpWord\PhpWord();
+        $section = $phpWord->addSection();        
+        $start_date = $letters->start_date;
+        $end_date = $letters->end_date;
+        $employee_nama = $letters->employee_name;
+        $employee_jabatan = $letters->employee_position;
+        $category = $letters->category;
+        $information_a = $letters->information_a;
+        $information_b = $letters->information_b;
+        $section->addImage("https://ilmucoding.com/wp-content/uploads/2020/01/Tutorial-Belajar-Framework-Laravel.jpg");
+        $section->addText($start_date);
+        $section->addText($end_date);
+        $section->addText($employee_nama);
+        $section->addText($employee_jabatan);
+        $section->addText($category);
+        $section->addText($information_a);
+        $section->addText($information_b);
+        $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
+        try {
+            $objWriter->save(storage_path('surat.docx'));
+        } catch (Exception $e) {
+        }
+        return response()->download(storage_path('surat.docx'));
     }
 }

@@ -55,10 +55,11 @@ Surat
               @foreach ($letters as $data)
               <tr>
                 <td>{{$loop->iteration}}</td>
-                <td>{{date('d-m-Y', strtotime($data->start_date))}}</td>
-                <td>{{date('d-m-Y', strtotime($data->end_date))}}</td>
+                <td>{{date('d-M-Y', strtotime($data->start_date))}}</td>
+                <td>{{date('d-M-Y', strtotime($data->end_date))}}</td>
                 <td>{{ $data->place_duty }}</td>
-                <td><a href="#" data-toggle="modal" data-target="#keterangan_{{$data->id}}">{{ $data->category }}</a>
+                <td><a href="#" data-toggle="modal" data-target="#keterangan_{{$data->id}}">Surat
+                    {{ $data->category }}</a>
                 </td>
                 <td>
                   <ul>
