@@ -90,7 +90,38 @@ Surat
                     </form>
                   </div>
                 </td>
+                <div class="modal fade" id="keterangan_{{$data->id}}" tabindex="-1" role="dialog"
+                  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Keterangan Surat {{$data->category}}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        @if($data->category === 'Coklit')
+                        <strong>Keterangan Poin B</strong>
+                        <p>{{$data->information_b}}</p>
+                        @elseif($data->category === 'Faktual')
+                        <strong>Keterangan Poin B</strong>
+                        <p>{{$data->information_b}}</p>
+                        @else
+                        <strong>Keterangan Poin A</strong>
+                        <p>{{$data->information_a}}</p>
+                        <strong>Keterangan Poin B</strong>
+                        <p>{{$data->information_b}}</p>
+                        @endif
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 @endforeach
+
             </tbody>
           </table>
         </div>
