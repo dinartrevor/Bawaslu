@@ -49,7 +49,7 @@ return [
             'host' => env('DB_HOST', 'db4free.net'),
             'port' => env('DB_PORT', '3306'),
             'database' => env('DB_DATABASE', ' bawaslu'),
-            'username' => env('DB_USERNAME', 'dinartrevor@localhost'),
+            'username' => env('DB_USERNAME', 'ec2-3-83-50-234.compute-1.amazonaws.com'),
             'password' => env('DB_PASSWORD', 'dinargta123'),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
