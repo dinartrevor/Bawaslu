@@ -162,7 +162,6 @@ class LetterController extends Controller
         $category = $letters->category;
         $information_a = $letters->information_a;
         $information_b = $letters->information_b;
-        $section->addImage("https://ilmucoding.com/wp-content/uploads/2020/01/Tutorial-Belajar-Framework-Laravel.jpg");
         $section->addText($start_date);
         $section->addText($end_date);
         $section->addText($employee_nama);
