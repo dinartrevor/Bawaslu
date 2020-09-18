@@ -53,7 +53,7 @@ Dashboard
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">DataTable Surat</h3>
-                    <a href="{{route('surat.create')}}" class="btn btn-primary float-right">Tambah</a>
+
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
