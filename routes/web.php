@@ -11,21 +11,26 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group([
     'prefix'     => 'contents',
     'namespace'  => 'Contents',
+    'middleware' => 'auth'
 ],
     function () {
         Route::resource('/pegawai','EmployeeController');
         Route::resource('/surat','LetterController');
         Route::get('/cetak_surat/{id}', 'LetterController@cetak_surat')->name('cetak_surat');
+    }
+);
+Route::group([
+    'prefix'     => '/',
+    
+    'middleware' => 'auth'
+],
+    function () {
+
+        Route::get('/', 'HomeController@index');
     }
 );

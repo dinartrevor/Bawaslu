@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Letter;
+use App\Models\Employee;
 class HomeController extends Controller
 {
     /**
@@ -23,6 +24,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $letters = Letter::with('employee')->get();
+        $employee = Employee::all()->count();
+        return view('index',compact('letters', 'employee'));
     }
 }

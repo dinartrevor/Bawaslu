@@ -53,9 +53,8 @@ Pegawai
                 <td>{{$data->name}}</td>
                 <td>{{$data->position}}</td>
                 <td>
+                  <a href="{{ route('pegawai.edit', $data->id)}}" class="btn btn-success"><i class="fas fa-pen"></i></a>
                   <div class="btn-group btn-group-sm">
-                    <a href="{{ route('pegawai.edit', $data->id)}}" class="btn btn-success"><i
-                        class="fas fa-pen"></i></a>
                     <form action="{{ route('pegawai.destroy' , $data->id)}}" method="POST">
                       <input name="_method" type="hidden" value="DELETE">
                       @csrf

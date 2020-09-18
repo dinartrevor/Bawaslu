@@ -22,8 +22,8 @@
         <!-- Add icons to the links using the .nav-icon class
          with font-awesome or any other icon font library  has-treeview menu-open -->
         <li class="nav-item">
-          <a href="/admin/dashboard" class="nav-link">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
+          <a href="{{url('/')}}" class="nav-link {{ Request::is('/') ? 'active' : '' }}"">
+            <i class=" nav-icon fas fa-tachometer-alt"></i>
             <p>
               Dashboard
               {{--  <i class="right fas fa-angle-left"></i>  --}}

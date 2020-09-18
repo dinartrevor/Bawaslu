@@ -37,7 +37,7 @@ Surat
             <strong>{{ $message }}</strong>
           </div>
           @endif
-          <table id="example1" class="table table-bordered table-striped table-responsive">
+          <table id="example1" class="table table-bordered table-hover table-responsive">
             <thead>
               <tr>
                 <th>No</th>
@@ -55,9 +55,9 @@ Surat
               @foreach ($letters as $data)
               <tr>
                 <td>{{$loop->iteration}}</td>
-                <td>{{date('d-M-Y', strtotime($data->start_date))}}</td>
-                <td>{{date('d-M-Y', strtotime($data->end_date))}}</td>
-                <td>{{ $data->place_duty }}</td>
+                <td style="width: 20%;">{{date('d-M-Y', strtotime($data->start_date))}}</td>
+                <td style="width: 20%;">{{date('d-M-Y', strtotime($data->end_date))}}</td>
+                <td style="width: 20%;">{{ $data->place_duty }}</td>
                 <td><a href="#" data-toggle="modal" data-target="#keterangan_{{$data->id}}">Surat
                     {{ $data->category }}</a>
                 </td>
@@ -75,11 +75,11 @@ Surat
                     @endforeach
                   </ul>
                 </td>
-                <td>
+                <td style="width: 90% !important;">
+                  <a href="{{ route('surat.edit', $data->id)}}" class="btn btn-success"><i class="fas fa-pen"></i></a>
+                  <a href="{{ route('cetak_surat', $data->id)}}" class="btn btn-primary"><i
+                      class="fas fa-upload"></i></a>
                   <div class="btn-group btn-group-sm">
-                    <a href="{{ route('surat.edit', $data->id)}}" class="btn btn-success"><i class="fas fa-pen"></i></a>
-                    <a href="{{ route('cetak_surat', $data->id)}}" class="btn btn-primary"><i
-                        class="fas fa-upload"></i></a>
                     <form action="{{ route('surat.destroy' , $data->id)}}" method="POST">
                       <input name="_method" type="hidden" value="DELETE">
                       @csrf
