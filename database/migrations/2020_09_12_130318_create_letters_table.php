@@ -18,8 +18,6 @@ class CreateLettersTable extends Migration
             $table->date('start_date');
             $table->date('end_date');
             $table->string('place_duty');
-            $table->integer('month');
-            $table->integer('year');
             $table->text('information_a')->nullable();
             $table->text('information_b')->nullable();
             $table->string('category');

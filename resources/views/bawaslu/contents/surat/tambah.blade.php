@@ -41,27 +41,15 @@ Admin|Surat|Tambah
                   <input type="date" class="form-control" name="end_date">
                 </div>
               </div>
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label for="inputEmail4">Bulan :</label>
-                  <input type="number" class="form-control" name="month" min="1" max="12">
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="inputPassword4">Tahun :</label>
-                  <input type="number" class="form-control" name="year">
-                </div>
-              </div>
               <div class="form-group">
                 <label for="name" class="col-form-label">Tempat Tugas:</label>
                 <input id="name" type="text" class="form-control @error('place_duty') is-invalid @enderror"
                   name="place_duty" value="{{ old('place_duty') }}" autofocus>
-
                 @error('place_duty')
                 <span class="invalid-feedback" role="alert">
                   <strong>{{ $message }}</strong>
                 </span>
                 @enderror
-
               </div>
               <div class="form-group">
                 <label for="category" class="col-form-label">Pilih Surat:</label>

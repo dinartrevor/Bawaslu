@@ -47,13 +47,20 @@ class LetterController extends Controller
         try {
              $insert = Letter::create($data);
             if(isset($insert['id'])) {
-
+                if(isset($data['category']) && $data['category']  == 'Coklit'){
+                    $data['information_a'] = 'Surat Keterangan A Coklit';
+                }
+                if(isset($data['category']) && $data['category']  == 'Faktual'){
+                    $data['information_a'] = 'Surat Keterangan A Faktual';
+                }
+                Letter::find($insert['id'])->update($data);
                 if(isset($request->employee_id) && $request->employee_id){
                     foreach ($data['employee_id'] as $key => $value) {
                         EmployeeLetter::create(array('letter_id' => $insert['id'],
                         'employee_id' => $value));
                     }
                 }
+                
                  DB::commit();
                  return redirect()->route('surat.index')->with('sukses','Data Berhasil Di simpan');
             }
@@ -153,27 +160,9 @@ class LetterController extends Controller
         } else {
             $letters = [];
         }
-        $phpWord = new \PhpOffice\PhpWord\PhpWord();
-        $section = $phpWord->addSection();        
-        $start_date = $letters->start_date;
-        $end_date = $letters->end_date;
-        $employee_nama = $letters->employee_name;
-        $employee_jabatan = $letters->employee_position;
-        $category = $letters->category;
-        $information_a = $letters->information_a;
-        $information_b = $letters->information_b;
-        $section->addText($start_date);
-        $section->addText($end_date);
-        $section->addText($employee_nama);
-        $section->addText($employee_jabatan);
-        $section->addText($category);
-        $section->addText($information_a);
-        $section->addText($information_b);
-        $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
-        try {
-            $objWriter->save(storage_path('surat.docx'));
-        } catch (Exception $e) {
-        }
-        return response()->download(storage_path('surat.docx'));
+        $pdf = PDF::loadView('bawaslu.contents.cetak_pdf',compact('letters'));
+        $pdf->setPaper('a4','potrait');
+
+        return $pdf->stream();
     }
 }

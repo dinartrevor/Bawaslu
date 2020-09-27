@@ -77,7 +77,7 @@ Surat
                 </td>
                 <td style="width: 90% !important;">
                   <a href="{{ route('surat.edit', $data->id)}}" class="btn btn-success"><i class="fas fa-pen"></i></a>
-                  <a href="{{ route('cetak_surat', $data->id)}}" class="btn btn-primary"><i
+                  <a href="{{ route('cetak_surat', $data->id)}}" class="btn btn-primary" target="_blank"><i
                       class="fas fa-upload"></i></a>
                   <div class="btn-group btn-group-sm">
                     <form action="{{ route('surat.destroy' , $data->id)}}" method="POST">
@@ -102,9 +102,13 @@ Surat
                       </div>
                       <div class="modal-body">
                         @if($data->category === 'Coklit')
+                        <strong>Keterangan Poin A</strong>
+                        <p>{{$data->information_a}}</p>
                         <strong>Keterangan Poin B</strong>
                         <p>{{$data->information_b}}</p>
                         @elseif($data->category === 'Faktual')
+                        <strong>Keterangan Poin A</strong>
+                        <p>{{$data->information_a}}</p>
                         <strong>Keterangan Poin B</strong>
                         <p>{{$data->information_b}}</p>
                         @else
