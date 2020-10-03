@@ -9,6 +9,7 @@ use App\Models\Employee;
 use App\Models\EmployeeLetter;
 use DB;
 use PDF;
+// use HnhDigital\PhpNumberConverter\NumConvert;
 class LetterController extends Controller
 {
     /**
@@ -48,10 +49,12 @@ class LetterController extends Controller
              $insert = Letter::create($data);
             if(isset($insert['id'])) {
                 if(isset($data['category']) && $data['category']  == 'Coklit'){
-                    $data['information_a'] = 'Surat Keterangan A Coklit';
+                    $data['information_a'] = 'Bahwa dalam rangka Melaksanakan Supervisi Pengawasan Pencocokan dan
+                    Penelitian (coklit) Pemilihan Kepala Daerah Tahun 2020 di 8 (delapan)
+                    Kabupaten/Kota di Provinsi Jawa Barat';
                 }
                 if(isset($data['category']) && $data['category']  == 'Faktual'){
-                    $data['information_a'] = 'Surat Keterangan A Faktual';
+                    $data['information_a'] = 'Bahwa dalam rangka Melaksanakan Supervisi Pengawasan Verifikasi Faktual Dukungan Perbaikan Bakal Pasangan Calon Perseorangan Pemilihan Kepala Daerah Tahun 2020';
                 }
                 Letter::find($insert['id'])->update($data);
                 if(isset($request->employee_id) && $request->employee_id){
@@ -160,7 +163,38 @@ class LetterController extends Controller
         } else {
             $letters = [];
         }
-        $pdf = PDF::loadView('bawaslu.contents.cetak_pdf',compact('letters'));
+        $date = strtotime($letters->start_date);
+        $date_end_date = strtotime($letters->end_date);      
+        $moonth = date('M', $date);
+        $roman = '';
+        if($moonth == 'Jan'){
+            $roman =  'I';
+        }elseif ($moonth == 'Feb') {
+            $roman = 'II';
+        }elseif ($moonth == 'Mar') {
+            $roman =  'III';
+        }elseif ($moonth == 'Apr') {
+            $roman =  'IV';
+        }elseif ($moonth == 'Mei') {
+         $roman =  'V';
+        }elseif ($moonth == 'Jun') {
+         $roman =  'VI';
+        }elseif ($moonth == 'Jul') {
+         $roman =  'VII';
+        }elseif ($moonth == 'Aug') {
+         $roman =  'VIII';
+        }elseif ($moonth == 'Sept') {
+         $roman =  'IX';
+        }elseif ($moonth == 'Oct') {
+         $roman =  'X';
+        }elseif ($moonth == 'Nov') {
+         $roman =  'XI';
+        }elseif ($moonth == 'Dec') {
+         $roman =  'XII';
+        }
+        $start_date = date('d', $date);
+        $end_date = date('d M yy', $date_end_date);
+        $pdf = PDF::loadView('bawaslu.contents.cetak_pdf',compact('letters', 'roman','start_date','end_date'));
         $pdf->setPaper('a4','potrait');
 
         return $pdf->stream();
