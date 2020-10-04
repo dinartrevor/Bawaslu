@@ -37,7 +37,7 @@ Surat
             <strong>{{ $message }}</strong>
           </div>
           @endif
-          <table id="example1" class="table table-bordered table-hover table-responsive">
+          <table id="example1" class="table table-bordered table-hover table-responsive text-center">
             <thead>
               <tr>
                 <th>No</th>
@@ -73,7 +73,7 @@ Surat
                     @endforeach
                   </ul>
                 </td>
-                <td style="width: 90% !important;">
+                <td style="width: 30% !important;">
                   <a href="{{ route('surat.edit', $data->id)}}" class="btn btn-success"><i class="fas fa-pen"></i></a>
                   <a href="{{ route('cetak_surat', $data->id)}}" class="btn btn-primary" target="_blank"><i
                       class="fas fa-upload"></i></a>

@@ -249,31 +249,44 @@
 </h4>
 <table border="0" cellspacing="0" cellpadding="0">
     <tbody>
+        @foreach ($letters->employee as $item)
         <tr style="margin-top: 2px;">
             <td width="91" valign="top">
                 <p>
-                    Kepada
+                    @if($loop->index === 0)
+                    kepada
+                    @endif
+                   
                 </p>
             </td>
             <td width="27" valign="top">
                 <p> 
+                    @if($loop->index === 0)
                     :
+                    @endif
                 </p>
             </td>
+         
             <td width="28" valign="top">
                 <p> 
-                    1.
+                    {{ $loop->iteration }} 
                 </p>
             </td>
             <td  valign="top">
+
+             
                 <p style="margin-bottom: 0px;">
-                    Nama : {{$letters->employee_name}}
+                    Nama : {{$item->name}}
                 </p>
                 <p style="margin-top: 2px;">
-                    Jabatan : {{$letters->employee_position}}
+                    Jabatan : {{$item->position}}
                 </p>
+               
+               
             </td>
+            
         </tr>
+        @endforeach
         <tr>
             <td width="75" valign="top">
                 <p>
@@ -288,7 +301,7 @@
                 </p>
             </td>
             <td valign="top">
-                <p style="margin-bottom: -24px;" align="Justify">
+                <p style="margin-bottom: 2px;" align="Justify">
                     {{substr($letters->information_a, 18)}} Bertempat di {{$letters->place_duty}} pada tanggal {{$start_date}} s.d {{$end_date}}
                 </p>
             </td>
