@@ -267,6 +267,7 @@
                 </p>
             </td>
          
+            
             <td width="28" valign="top">
                 <p> 
                     {{ $loop->iteration }} 
