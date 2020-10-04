@@ -22,6 +22,8 @@ Route::group([
         Route::resource('/pegawai','EmployeeController');
         Route::resource('/surat','LetterController');
         Route::get('/cetak_surat/{id}', 'LetterController@cetak_surat')->name('cetak_surat');
+        Route::get('/search/pegawai', 'LetterController@action')->name('pegawai_search');
+
     }
 );
 Route::group([

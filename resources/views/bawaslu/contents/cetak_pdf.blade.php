@@ -10,7 +10,7 @@
     <tbody>
         <tr>
             <td colspan="2" valign="top">
-                <p style="margin-bottom: 2px">
+                <p style="margin-bottom: -34px">
                     <img
                         width="295"
                         height="80"
@@ -27,10 +27,10 @@
                 <p style="margin-bottom: 2px">
                     Jalan Turangga Nomor 25 Bandung 40264
                 </p>
-                <p style="margin-top: 2px" style="margin-bottom: 2px">
+                <p style="margin-top: 2px" >
                     Telepon 022-61504245/7332604
                 </p>
-                <p style="margin-top: 2px" >
+                <p style="margin-top: -18px; margin-bottom: -20px">
                     Laman:
                     <a href="http://www.bawaslu-jabarprov.go.id/">
                         www.bawaslu-jabarprov.go.id
@@ -101,14 +101,11 @@
     </tr>
   </tbody>
 </table>
-<p>
-    <strong></strong>
-</p>
 <table border="0" cellspacing="0" cellpadding="0">
     <tbody>
         <tr>
             <td width="50" valign="top">
-                <p>
+                <p >
                     Dasar
                 </p>
             </td>
@@ -123,7 +120,7 @@
                 </p>
             </td>
             <td  valign="top">
-                <p style="margin-botton: 2px; " align="Justify">
+                <p style="margin-bottom: -20px; " align="Justify">
                     Undang-Undang Nomor 7 Tahun 2017 tentang Pemilihan Umum;
                 </p>
             </td>
@@ -134,12 +131,12 @@
             <td width="5" valign="top">
             </td>
             <td width="4" valign="top">
-                <p style="margin-top: 2px; margin-bottom: 2px;">
+                <p style="margin-top: -10px; margin-bottom: 2px;">
                     2.
                 </p>  
             </td>
             <td valign="top">
-                <p style="margin-top: 2px; margin-bottom: 2px;" align="Justify">
+                <p style="margin-top: -10px; margin-bottom: -2px;" align="Justify">
                     Peraturan Presiden Nomor 68 Tahun 2018 Tentang Kedudukan,
                     Tugas, Fungsi, Wewenang, Organisasi, dan Tata Kerja
                     Sekretariat Jenderal Badan Pengawas Pemilihan Umum,
@@ -236,7 +233,7 @@
                 </p>
             </td>
             <td  valign="top">
-                <p style="margin-top: 2px; " align="Justify">
+                <p style="margin-top: -2px; " align="Justify">
                     Surat Pengesahan Daftar Isian Pelaksanaan Anggaran Petikan
                     Tahun Anggaran 2020 Nomor SP DIPA- 115.01.2.686307/2020
                     Tanggal 12 November 2019 Kode <em>Digital Stamp </em>
@@ -247,7 +244,7 @@
         </tr>
     </tbody>
 </table>
-<h4 style="margin-bottom: 2px;" align="center">
+<h4 style="margin-bottom: -20px; margin-top: -15px;" align="center">
   MENUGASKAN
 </h4>
 <table border="0" cellspacing="0" cellpadding="0">
@@ -291,10 +288,8 @@
                 </p>
             </td>
             <td valign="top">
-                <p style="margin-bottom: 2px;" align="Justify">
-                    Melaksanakan Supervisi Pengawasan Pendaftaran Bakal
-                    Pasangan Calon Pada Pemilihan Kepala Daerah Tahun 2020,
-                    bertempat di {{$letters->place_duty}} pada tanggal {{$start_date}} s.d {{$end_date}}
+                <p style="margin-bottom: -24px;" align="Justify">
+                    {{substr($letters->information_a, 18)}} Bertempat di {{$letters->place_duty}} pada tanggal {{$start_date}} s.d {{$end_date}}
                 </p>
             </td>
         </tr>

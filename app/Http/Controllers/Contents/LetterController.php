@@ -48,15 +48,7 @@ class LetterController extends Controller
         try {
              $insert = Letter::create($data);
             if(isset($insert['id'])) {
-                if(isset($data['category']) && $data['category']  == 'Coklit'){
-                    $data['information_a'] = 'Bahwa dalam rangka Melaksanakan Supervisi Pengawasan Pencocokan dan
-                    Penelitian (coklit) Pemilihan Kepala Daerah Tahun 2020 di 8 (delapan)
-                    Kabupaten/Kota di Provinsi Jawa Barat';
-                }
-                if(isset($data['category']) && $data['category']  == 'Faktual'){
-                    $data['information_a'] = 'Bahwa dalam rangka Melaksanakan Supervisi Pengawasan Verifikasi Faktual Dukungan Perbaikan Bakal Pasangan Calon Perseorangan Pemilihan Kepala Daerah Tahun 2020';
-                }
-                Letter::find($insert['id'])->update($data);
+
                 if(isset($request->employee_id) && $request->employee_id){
                     foreach ($data['employee_id'] as $key => $value) {
                         EmployeeLetter::create(array('letter_id' => $insert['id'],
@@ -198,5 +190,56 @@ class LetterController extends Controller
         $pdf->setPaper('a4','potrait');
 
         return $pdf->stream();
+    }
+    function action(Request $request)
+    {
+     if($request->ajax())
+     {
+      $output = '';
+      $query = $request->get('query');
+      if($query != '')
+      {
+       $data = DB::table('employees')
+         ->where('name', 'like', '%'.$query.'%')
+         ->orderBy('created_at', 'desc')
+         ->get();
+         
+      }
+      else
+      {
+       $data = DB::table('employees')
+         ->orderBy('created_at', 'desc')
+         ->get();
+      }
+      $total_row = $data->count();
+      if($total_row > 0)
+      {
+          $loop = 1;
+       foreach($data as $row)
+       {
+        $output .= '
+        <tr>
+        <td>'.$loop++.'</td>
+         <td>'.$row->name.'</td>
+         <td>'.$row->position.'</td>
+         <td><input type="checkbox" name="employee_id[]" value="'.$row->id.'"></td>
+        </tr>
+        ';
+       }
+      }
+      else
+      {
+       $output = '
+       <tr>
+        <td align="center" colspan="5">No Data Found</td>
+       </tr>
+       ';
+      }
+      $data = array(
+       'table_data'  => $output,
+      );
+
+      echo json_encode($data);
+     }
     }
 }

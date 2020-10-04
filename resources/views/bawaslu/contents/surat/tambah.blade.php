@@ -41,16 +41,21 @@ Admin|Surat|Tambah
                   <input type="date" class="form-control" name="end_date">
                 </div>
               </div>
-              <div class="form-group">
-                <label for="name" class="col-form-label">Tempat Tugas:</label>
-                <input id="name" type="text" class="form-control @error('place_duty') is-invalid @enderror"
-                  name="place_duty" value="{{ old('place_duty') }}" autofocus>
+              <div class="form-row">
+                <div class="form-group col-md-12">
+                  <label for="name" class="col-form-label">Tempat Tugas:</label>
+                  <input id="name" type="text" class="form-control @error('place_duty') is-invalid @enderror"
+                    name="place_duty" value="{{ old('place_duty') }}" autofocus>
+               
+                </div>
+                
                 @error('place_duty')
                 <span class="invalid-feedback" role="alert">
                   <strong>{{ $message }}</strong>
                 </span>
                 @enderror
               </div>
+             
               <div class="form-group">
                 <label for="category" class="col-form-label">Pilih Surat:</label>
                 <select name="category" id="category" class="form-control">
@@ -69,17 +74,21 @@ Admin|Surat|Tambah
               </div>
               <div class="form-group" id="keterangan_a">
                 <label for="comment">Ketarangan A :</label>
-                <textarea class="form-control" rows="5" id="information_a" name="information_a"></textarea>
+                <textarea class="form-control" rows="5" id="information_a" name="information_a">Bahwa dalam rangka</textarea>
               </div>
               <div class="form-group" id="keterangan_b">
                 <label for="comment">Keterangan B :</label>
-                <textarea class="form-control" rows="5" id="information_b" name="information_b"></textarea>
+                <textarea class="form-control" rows="5" id="information_b" name="information_b">Bahwa sehubungan dengan huruf a diatas</textarea>
               </div>
               <div class="card">
                 <div class="card-header">
                   <h3 class="card-title">DataTable Pegawai</h3>
                 </div>
+                
                 <div class="card-body">
+                  <div class="form-group">
+                    <input type="text" name="search" id="search" class="form-control" placeholder="Search" />
+                   </div>
                   <table class="table table-bordered table-hover text-center">
                     <thead>
                       <tr>
@@ -89,7 +98,7 @@ Admin|Surat|Tambah
                         <th>Aksi</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="data_pegawai_surat">
                       @foreach ($employees as $data)
                       <tr>
                         <td>{{$loop->iteration}}</td>

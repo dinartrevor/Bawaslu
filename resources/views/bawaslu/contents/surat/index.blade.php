@@ -43,7 +43,6 @@ Surat
                 <th>No</th>
                 <th>Mulai Dari</th>
                 <th>Sampai Dengan</th>
-                <th>Tempat Tugas</th>
                 <th>Kategori</th>
                 <th>Nama</th>
                 <th>Jabatan</th>
@@ -57,7 +56,6 @@ Surat
                 <td>{{$loop->iteration}}</td>
                 <td style="width: 20%;">{{date('d-M-Y', strtotime($data->start_date))}}</td>
                 <td style="width: 20%;">{{date('d-M-Y', strtotime($data->end_date))}}</td>
-                <td style="width: 20%;">{{ $data->place_duty }}</td>
                 <td><a href="#" data-toggle="modal" data-target="#keterangan_{{$data->id}}">Surat
                     {{ $data->category }}</a>
                 </td>

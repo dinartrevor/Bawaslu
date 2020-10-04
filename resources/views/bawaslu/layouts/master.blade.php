@@ -120,27 +120,29 @@
       // });
     });
     $(".select2").select2({"allowClear": true, "placeholder": {"id": "", "text": "Courses"}});
-    $(function () {
-      $('#keterangan_a').hide();
-      $('#keterangan_b').hide();
+    $(document).ready(function(){
 
-      $('#category').change(function () {
-        if ($('#category').val() == 'Coklit') {
-          $('#keterangan_b').show();
-        }
-        if($('#category').val() == 'Faktual'){
-          $('#keterangan_b').show();
-        }
-        if($('#category').val() == 'Biasa'){
-          $('#keterangan_a').show();
-          $('#keterangan_b').show();
-        } 
-        if ($('#category').val() == '') {
-          $('#keterangan_a').hide();
-          $('#keterangan_b').hide();
-        }
+      data_pegawai();
+
+      function data_pegawai(query = '')
+      {
+        $.ajax({
+          url:"{{ route('pegawai_search') }}",
+          method:'GET',
+          data:{query:query},
+          dataType:'json',
+          success:function(data)
+          {
+            $('#data_pegawai_surat').html(data.table_data);
+          }
+        });
+      }
+
+      $(document).on('keyup', '#search', function(){
+        var query = $(this).val();
+        data_pegawai(query);
       });
-
+   
     });
   </script>
   <script>
@@ -148,6 +150,29 @@
     dateFormat: 'yy-mm-dd',
     startDate: '-3d'
 });
+  </script>
+  <script>
+       function tambahForm(e) {
+        if (e === 'tempat') {
+
+        var akhir = '</';
+        let isi = 
+              `
+                <div class="form-group col-md-6" id="add_tempat">
+                  <label for="name" class="col-form-label">Tempat Tugas` + akhir + `label>
+                  <input type="text" name="place_duty[]" class=" form-control " >
+              `+ akhir + `div>
+              <div class="form-group col-md-6 " id="delete_tempat" style="margin-top: 36px;">
+                  <a onclick="deleteForm('tempat')" class="btn btn-primary" style="cursor:pointer; color: white;"><i class="fa fa-times" aria-hidden="true">`+akhir+`i>`+akhir+`a>
+            `+ akhir + `div>`
+        jQuery(isi).appendTo(jQuery("#inputan_tempat"));
+              }
+      }
+      function deleteForm(e) {
+  if (e === 'tempat') {
+    jQuery('#add_tempat').remove();
+    jQuery('#delete_tempat').remove();
+  }}
   </script>
 </body>
 
