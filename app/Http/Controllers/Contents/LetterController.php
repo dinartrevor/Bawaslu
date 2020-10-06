@@ -185,8 +185,9 @@ class LetterController extends Controller
          $roman =  'XII';
         }
         $start_date = date('d', $date);
-        $end_date = date('d M yy', $date_end_date);
-        $pdf = PDF::loadView('bawaslu.contents.cetak_pdf',compact('letters', 'roman','start_date','end_date'));
+        $end_date = date('d F yy', $date_end_date);
+        $end_date_filter_month= date('F yy', $date_end_date);
+        $pdf = PDF::loadView('bawaslu.contents.cetak_pdf',compact('letters', 'roman','start_date','end_date', 'end_date_filter_month'));
         $pdf->setPaper('a4','potrait');
 
         return $pdf->stream();
