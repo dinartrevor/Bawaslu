@@ -298,7 +298,7 @@
                 <td valign="top">
                     <p style="margin-bottom: 2px;" align="Justify">
                         {{substr($letters->information_a, 18)}} Bertempat di {{$letters->place_duty}} pada tanggal
-                        {{$start_date}} s.d {{$end_date}}
+                        {{ showDateTime($letters->start_date, 'l, d F Y') }} s.d  {{ showDateTime($letters->end_date, 'l, d F Y') }}
                     </p>
                 </td>
             </tr>
@@ -344,7 +344,7 @@
                                 </td>
                                 <td valign="top">
                                     <p style="margin-top: 2px;" align="center">
-                                        Tanggal: {{$end_date_filter_month}}
+                                        Tanggal:  {{ showDateTime($letters->start_date, 'F Y') }}
                                     </p>
                                 </td>
                             </tr>

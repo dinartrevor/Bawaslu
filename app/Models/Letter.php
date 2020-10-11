@@ -25,4 +25,10 @@ class Letter extends Model
         $relatedModel = Employee::class;
         return $this->belongsToMany($relatedModel, $pivotTable, 'letter_id', 'employee_id')->limit(1);
     }
+    public function getAtributeDates($value)
+    {
+        $value = Carbon::parse($value);
+        return $parse->translatedFormat('l, d F Y');
+    }
+    protected $dates = ['start_date','end_date'];
 }
