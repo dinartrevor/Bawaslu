@@ -54,8 +54,8 @@ Surat
               @foreach ($letters as $data)
               <tr>
                 <td>{{$loop->iteration}}</td>
-                <td style="width: 20%;">{{date('d-M-Y', strtotime($data->start_date))}}</td>
-                <td style="width: 20%;">{{date('d-M-Y', strtotime($data->end_date))}}</td>
+                <td style="width: 20%;">{{ showDateTime($data->start_date, 'd F Y') }}</td>
+                <td style="width: 20%;">{{ showDateTime($data->end_date, 'd F Y') }}</td>
                 <td><a href="#" data-toggle="modal" data-target="#keterangan_{{$data->id}}">Surat
                     {{ $data->category }}</a>
                 </td>

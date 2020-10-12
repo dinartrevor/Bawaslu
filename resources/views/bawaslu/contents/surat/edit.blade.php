@@ -36,11 +36,11 @@ Admin|Surat|Tambah
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="inputEmail4">Mulai Dari : </label>
-                  <input type="date" class="form-control" name="start_date" value="{{$letters->start_date}}">
+                  <input type="date" class="form-control" name="start_date" value="{{ showDateTime($letters->start_date, 'Y-m-d') }}">
                 </div>
                 <div class="form-group col-md-6">
                   <label for="inputPassword4">Sampai Dengan :</label>
-                  <input type="date" class="form-control" name="end_date" value="{{$letters->end_date}}">
+                  <input type="date" class="form-control" name="end_date" value="{{ showDateTime($letters->end_date, 'Y-m-d') }}">
                 </div>
               </div>
               <div class="form-group">
