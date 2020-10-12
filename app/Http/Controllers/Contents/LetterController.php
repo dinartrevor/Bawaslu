@@ -19,7 +19,7 @@ class LetterController extends Controller
      */
     public function index()
     {
-        $letters = Letter::with('employee')->get();
+        $letters = Letter::with('employee')->orderby('created_at', 'DESC')->get();
         
         return view('bawaslu.contents.surat.index', compact('letters'));
     }
